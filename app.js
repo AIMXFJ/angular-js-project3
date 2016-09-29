@@ -44,7 +44,7 @@ function NarrowItDownController(MenuSearchService) {
     });
   }
 
-  menu.onRemove = function(itemIndex){
+  menu.remove = function(itemIndex){
     menu.found.splice(itemIndex,1);
   }
 
@@ -71,16 +71,18 @@ function MenuSearchService($http, ApiBasePath) {
     }).then(function (result) {
     // process result and only keep items that match
     var foundItems = new Array();
-    var menu_items = result.data.menu_items;
+    foundItems = result.data.menu_items.filter(function (item) {
+      return item.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+    }, service);;
 
-    if(menu_items.length > 0){
+    /*if(menu_items.length > 0){
       for(var i in menu_items){
         var desc = menu_items[i].description;
         if(desc.toLowerCase().indexOf(service.searchTerm.toLowerCase())!=-1){
           foundItems.push(menu_items[i]);
         }
       }
-    }
+    }*/
 
     // return processed items
     return foundItems;

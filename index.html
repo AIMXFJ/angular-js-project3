@@ -23,7 +23,7 @@
     <items-loader-indicator></items-loader-indicator>
 
     <!-- found-items should be implemented as a component -->
-    <found-items found="foundItems.found" on-remove="foundItems.onRemove($index)"></found-items>
+    <found-items found="foundItems.found" on-remove="foundItems.remove(index)"></found-items>
     <div class="error" ng-if="!foundItems.found.length">Nothing found.</div>
   </div>
 
